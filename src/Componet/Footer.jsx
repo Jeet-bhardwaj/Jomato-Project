@@ -14,9 +14,6 @@ const Footer = () => {
           <span className="text-muted">© 2024 Jomato, Inc</span>
         </div>
 
-        <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
-          
-        </ul>
       </footer>
     </>
   );
