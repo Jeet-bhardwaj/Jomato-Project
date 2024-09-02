@@ -10,7 +10,10 @@ const Home = () => {
       <div>
         <Carausal />
       </div>
-      <div>
+      <div className="">
+        <Card />
+        <Card />
+        <Card />
         <Card />
       </div>
       <Footer />
