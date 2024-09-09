@@ -6,20 +6,19 @@ const mongoURL = 'mongodb+srv://bhardwajjeet408:2b8ykuIE0PsH9O56@cluster0.f1pcg.
 // Function to connect to MongoDB
 const connectToMongoDB = async () => {
     try {
-        // Connect to the database
-        await mongoose.connect(mongoURL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        // Connect to the database without deprecated options
+        await mongoose.connect(mongoURL);
+
+        // Log success
         console.log("Database connected successfully");
 
-        // Once connected, fetch the data
+        // Fetch and return data from the database
         const fetchedData = await fetchData();
         console.log(fetchedData);
     } catch (err) {
         console.error("Failed to connect to the database", err);
     }
-}
+};
 
 // Function to fetch data from the "Food_detail" collection
 const fetchData = async () => {
@@ -30,6 +29,11 @@ const fetchData = async () => {
     } catch (err) {
         console.error("Error fetching data", err);
     }
-}
+};
+
+mongoose.connection.on('error', err => {
+    console.error('Connection error:', err);
+});
 
 module.exports = connectToMongoDB;
+
