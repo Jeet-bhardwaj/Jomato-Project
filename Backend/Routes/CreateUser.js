@@ -1,25 +1,25 @@
 const express  = require('express');
 const router = express.Router();
-const User = require('../models/user');
-const { Await } = require('react-router-dom');
+const User = require('../models/User');
 
 
-router.post("/creatuser", async (req,res) => {
+
+router.post("/CreateUser", async (req,res) => {
     try{
         await User.create({
             name: "jeeeeeeet",
             password: "123214",
             email:"JEETR2030@gamil.com",
-            location:"patna",
+            location:"patna"
 
         })
-        re
+        res.json({success:true});
     }
     catch(error){
         console.log(error);
         res.json({success:false});
     }
 })
-
+module.exports  = router;
 
  

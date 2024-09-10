@@ -4,15 +4,17 @@ const port = 5000;
 const mongodb = require("./db");
 mongodb();
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello World!');
 });
 
-app.get('/api/')
+// Routes for user creation
+app.use('/api', require("./Routes/CreateUser"));
+
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`);
 });
