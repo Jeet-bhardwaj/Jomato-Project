@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Login from "../Screen/Login";
+// import Login from "../Screen/Login";
 const Navbar = () => {
   return (
     <>
@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link className="nav-link active" aria-current="page" to="#">Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/login">Login</Link>
+        <Link className="nav-link " aria-current="page" to="#">Login</Link>
         </li>
        
       </ul>
