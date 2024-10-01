@@ -7,7 +7,7 @@ import {
 import '../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 import SignUp from "./Screen/SignUp.jsx";
-import Login from "./Componet/Login.jsx";
+import Login from "./Screen/Login.jsx";
 
 function App() {
   return (
