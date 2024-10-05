@@ -1,38 +1,53 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react"; 
+import { Link } from "react-router-dom"; 
+
 
 const Login = () => {
+
+
+
   const [credentials, setCredentials] = useState({
-    Myuser: "",
+    email: "",
     password: "",
-    Geolocation: ""
   });
 
-  // Handle input changes
-  const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/api/CreateUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
+      const json = await response.json(); 
+      console.log(json);
+      if (!response.ok) {
+        console.error("Error:", json.message || "Failed to sign up");
+      } else {
+        console.log("User signed up successfully!");
+      }
+    } catch (error) {
+      console.error("Error:", error); 
+    }
   };
 
-  const handleOnsubmit = async (e) => {
-    e.preventDefault();
-    // Make sure to include the credentials in the fetch body
-    const response = await fetch("http://localhost:5000/api/CreateUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(credentials)
-    });
 
-    // Check for response and handle accordingly
-    const result = await response.json();
-    console.log(result); // Log or handle the response
+  const onChange = (event) => {
+    setCredentials({
+      ...credentials,
+      [event.target.name]: event.target.value,
+    });
   };
 
   return (
     <>
       <div className="container">
-        <form onSubmit={handleOnsubmit}>
+        <form onSubmit={handleOnSubmit}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
               Name
@@ -43,7 +58,7 @@ const Login = () => {
               id="exampleName"
               name="Myuser"
               value={credentials.Myuser}
-              onChange={handleChange}
+              onChange={onChange}
               aria-describedby="name"
             />
           </div>
@@ -58,22 +73,10 @@ const Login = () => {
               id="exampleInputEmail1"
               name="password"
               value={credentials.password}
-              onChange={handleChange}
+              onChange={onChange}
               aria-describedby="password"
             />
           </div>
-
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              Check me out
-            </label>
-          </div>
-
           <button type="submit" className="btn btn-success">
             Submit
           </button>
