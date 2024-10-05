@@ -13,20 +13,36 @@ const mongodb = require("./db");
 // Now, we call the 'mongodb' function to connect our app to the database as soon as the server starts.
 mongodb();
 
-// This part is a middleware function that runs before every request. It allows the frontend (at localhost:3000) to talk to the backend (this server).
-app.use((req, res, next) => {
-  // This sets a header to allow requests from 'http://localhost:3000'. It's like saying, "Hey, requests from this address are okay."
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
-  // This allows certain types of headers in the request, like 'Content-Type' and 'Accept'.
+
+app.use((req, res, next) => {
+  const allowedOrigins = ['http://localhost:3000', 'http://localhost:5173'];
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, x-Requested-with, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
 
-  // 'next()' moves to the next middleware or route handler. It's like saying, "Okay, we're done here, move on!"
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+
+  // If the request is a preflight request (OPTIONS), respond with 200 status
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
   next();
 });
+
+
+
 
 // This tells our app to automatically understand JSON data coming in the body of requests. So if someone sends data in JSON format, the app can read it.
 app.use(express.json());
