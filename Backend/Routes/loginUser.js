@@ -4,7 +4,7 @@ const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 
 // Create a new user
-router.post("/loginuser", [
+router.post("/loginUser", [
     body('email').isEmail(),
     body('password', 'incorrect Password').isLength({ min: 5 }),
 ], async (req, res) => {

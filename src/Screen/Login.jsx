@@ -1,11 +1,8 @@
 import React, { useState } from "react"; 
-import { Link } from "react-router-dom"; 
-
+import { Link, useNavigate } from "react-router-dom"; 
 
 const Login = () => {
-
-
-
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -14,7 +11,7 @@ const Login = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/CreateUser", {
+      const response = await fetch("http://localhost:5000/api/loginUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,18 +21,22 @@ const Login = () => {
           password: credentials.password,
         }),
       });
-      const json = await response.json(); 
+      const json = await response.json();
       console.log(json);
-      if (!response.ok) {
-        console.error("Error:", json.message || "Failed to sign up");
+
+      if (response.ok) {
+        // Navigate to homepage or dashboard on successful login
+        navigate("/"); 
+        console.log("User logged in successfully!");
       } else {
-        console.log("User signed up successfully!");
+        console.error("Error:", json.message || "Failed to login");
+        alert("Enter valid Email and Password");
       }
     } catch (error) {
-      console.error("Error:", error); 
+      console.error("Error:", error);
+      alert("Network error. Please try again later.");
     }
   };
-
 
   const onChange = (event) => {
     setCredentials({
@@ -48,33 +49,29 @@ const Login = () => {
     <>
       <div className="container">
         <form onSubmit={handleOnSubmit}>
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="exampleName"
-              name="Myuser"
-              value={credentials.Myuser}
-              onChange={onChange}
-              aria-describedby="name"
-            />
-          </div>
+          <label htmlFor="exampleInputEmail1" className="form-label">
+            Email address
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="exampleInputEmail1"
+            name="email"
+            value={credentials.email}
+            onChange={onChange}
+          />
 
           <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
               type="password"
               className="form-control"
-              id="exampleInputEmail1"
+              id="exampleInputPassword1"  // Updated ID for the password field
               name="password"
               value={credentials.password}
               onChange={onChange}
-              aria-describedby="password"
             />
           </div>
           <button type="submit" className="btn btn-success">
