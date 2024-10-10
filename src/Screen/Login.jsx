@@ -1,5 +1,5 @@
-import React, { useState } from "react"; 
-import { Link, useNavigate } from "react-router-dom"; 
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,12 +23,19 @@ const Login = () => {
       });
       const json = await response.json();
       console.log(json);
-
-      if (response.ok) {
+      if (json.success) {
+        localStorage.setItem("authToken", json.authToken);
+        console.log(localStorage.getItem("authToken"));
         // Navigate to homepage or dashboard on successful login
-        navigate("/"); 
+        navigate("/");
         console.log("User logged in successfully!");
-      } else {
+      }
+
+      // if (response.ok) {
+      //   // Navigate to homepage or dashboard on successful login
+      //   navigate("/");
+      //   console.log("User logged in successfully!");}
+      else {
         console.error("Error:", json.message || "Failed to login");
         alert("Enter valid Email and Password");
       }
@@ -68,7 +75,7 @@ const Login = () => {
             <input
               type="password"
               className="form-control"
-              id="exampleInputPassword1"  // Updated ID for the password field
+              id="exampleInputPassword1" // Updated ID for the password field
               name="password"
               value={credentials.password}
               onChange={onChange}
