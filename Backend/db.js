@@ -8,14 +8,15 @@ const connectToMongoDB = async () => {
     try {
         // Connect to the database with additional options
         await mongoose.connect(mongoURL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
+            // useNewUrlParser: true,
+            // useUnifiedTopology: true
         });
 
         // Log success
         console.log("Database connected successfully");
 
         // Fetch data and set it as global variables
+        
         const { data: FoodDetails, data2: FoodItems } = await fetchData();
         global.Food_details = FoodDetails; // Set global variable for Food_detail collection
         global.Food_items = FoodItems; // Set global variable for Food_items collection

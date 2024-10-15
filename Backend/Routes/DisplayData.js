@@ -1,18 +1,13 @@
 const express = require("express");
-const { Routes } = require("react-router-dom");
-const router  = express.Router();
+const router = express.Router();
 
-
-router.post('/foodData', (req,res)=>{
+router.post('/foodData', (req, res) => {
     try {
-        console.log(global.Food_details);
-        res.send([global.Food_details]);
-    } catch(error){
-        console.log(error);
-        res.send("Server error");
-
+        res.json([global.Food_details, global.Food_items]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: "Server error occurred while fetching food data." });
     }
-
-})
+});
 
 module.exports = router;
