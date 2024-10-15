@@ -53,8 +53,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Here, we set up more routes (paths) under '/api'. It's like saying, "If someone goes to '/api', look for the routes in the 'CreateUser' file."
+// Here, we set up more routes (paths) under '/api'. It's like saying, "If someone goes to '/api', look for the routes in the 'Crea.teUser' file."
 app.use('/api', require("./Routes/CreateUser"));
+app.use('/api', require("./Routes/DisplayData"));
 // app.use('/api', require("./Routes/"));
 
 // Finally, we tell the app to start listening for requests on port 5000. When it starts, it will log this message to the console.
