@@ -14,8 +14,9 @@ const Card = ({ foodItem, description, options, imgScr }) => {
             >
                 <img
                     src= {imgScr}
-                    className="card-img-top"
+                    className="card-img-top "
                     alt="..."
+                    style={{height:"180px",objectFit:"fill"}}
                 />
                 <div className="card-body">
                     <h5 className="card-title">{foodItem}</h5>

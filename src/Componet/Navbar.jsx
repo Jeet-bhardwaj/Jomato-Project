@@ -30,29 +30,27 @@ const Navbar = () => {
                                     Home
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link
-                                    className="nav-link "
-                                    aria-current="page"
-                                    to="/login"
-                                >
-                                    Login
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link
-                                    className="nav-link "
-                                    aria-current="page"
-                                    to="/signup"
-                                >
-                                    SignUp
-                                </Link>
-                            </li>
                         </ul>
+                        <div className="d-flex">
+                            <Link
+                                className="nav-link "
+                                aria-current="page"
+                                to="/login"
+                            >
+                                Login
+                            </Link>
+
+                            <Link
+                                className="nav-link "
+                                aria-current="page"
+                                to="/signup"
+                            >
+                                SignUp
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </nav>
-
         </>
     );
 };
