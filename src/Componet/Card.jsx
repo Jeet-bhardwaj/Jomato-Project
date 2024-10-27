@@ -1,6 +1,7 @@
 const Card = ({ foodItem, description, options, imgScr }) => {
     // let options = options;
     let priceOption = Object.keys(options);
+    const handilAddInCart = () => {};
 
     return (
         <>
@@ -13,10 +14,10 @@ const Card = ({ foodItem, description, options, imgScr }) => {
                 }}
             >
                 <img
-                    src= {imgScr}
+                    src={imgScr}
                     className="card-img-top "
                     alt="..."
-                    style={{height:"180px",objectFit:"fill"}}
+                    style={{ height: "180px", objectFit: "fill" }}
                 />
                 <div className="card-body">
                     <h5 className="card-title">{foodItem}</h5>
@@ -43,6 +44,11 @@ const Card = ({ foodItem, description, options, imgScr }) => {
                         </select>
                         <div className=" d-inline h-100 fs-5 ">Total price</div>
                     </div>
+                    <hr />
+                    <button
+                        className={`btn btn-success justify-center ms-2`}
+                        onClick={handilAddInCart}
+                    >Add in cart</button>
                 </div>
             </div>
         </>
