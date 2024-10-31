@@ -120,10 +120,8 @@ const Home = () => {
                                             className="col-12 col-md-6 col-lg-3"
                                         >
                                             <Card
-                                                foodItem={filteredItem.name}
+                                                foodItem={filteredItem}
                                                 options={filteredItem.options[0]}
-                                                description={filteredItem.description}
-                                                imgScr={filteredItem.img}
                                             />
                                         </div>
                                     ))
