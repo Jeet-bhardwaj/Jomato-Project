@@ -1,6 +1,6 @@
 const Card = (props) => {
-    // let options = options;
-    let priceOption = Object.keys(options);
+    let FoodItem = props.foodItem;
+    let priceOption = Object.keys(props.options);
     const handilAddInCart = () => {};
 
     return (
@@ -14,14 +14,14 @@ const Card = (props) => {
                 }}
             >
                 <img
-                    src={props.foodItem.imgScr}
+                    src={FoodItem.img}
                     className="card-img-top "
                     alt="..."
                     style={{ height: "180px", objectFit: "fill" }}
                 />
                 <div className="card-body">
-                    <h5 className="card-title">{props.foodItem.name}</h5>
-                    <p className="card-text">{prodescription}</p>
+                    <h5 className="card-title">{FoodItem.CategoryName}</h5>
+                    <p className="card-text">{FoodItem.description}</p>
                     <div className=" container w-100">
                         <select className="m-2 h-100  bg-success rounded">
                             {Array.from(Array(6), (e, i) => {
@@ -48,7 +48,9 @@ const Card = (props) => {
                     <button
                         className={`btn btn-success justify-center ms-2`}
                         onClick={handilAddInCart}
-                    >Add in cart</button>
+                    >
+                        Add in cart
+                    </button>
                 </div>
             </div>
         </>

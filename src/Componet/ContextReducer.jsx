@@ -8,14 +8,14 @@ const CartDispatchContext = createContext();   // Context for the dispatch funct
 const reducer = (state, action) => {
 };
 
-export const CartProvider = ({ Children }) => {
+export const CartProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, []);
 
     return (
         <>
             <CartDispatchContext.Provider value={dispatch}>
                 <CreateStateContext.Provider value={state}>
-                    {Children}
+                    {children}
                 </CreateStateContext.Provider>
             </CartDispatchContext.Provider>
         </>
