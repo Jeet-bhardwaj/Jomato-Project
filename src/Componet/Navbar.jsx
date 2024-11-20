@@ -60,10 +60,10 @@ const Navbar = () => {
                                 className="btn bg-white text-success mx-1"
                                 to=""
                             >
-                                mycart
+                                My cart
                             </Link>
                             <Link
-                                className="btn bg-white text-success mx-1"
+                                className="btn bg-white text-danger mx-1"
                                 to=""
                                 onClick={handilOnClick}
                             >

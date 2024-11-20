@@ -1,7 +1,9 @@
+// Home.js
+import React, { useState, useEffect } from "react";
 import Navbar from "../Componet/Navbar";
 import Footer from "../Componet/Footer";
 import Card from "../Componet/Card";
-import { useState, useEffect } from "react";
+import Mystyle from "./Home.module.css"
 
 const Home = () => {
     const [search, setSearch] = useState("");
@@ -10,15 +12,13 @@ const Home = () => {
 
     const loadData = async () => {
         try {
-            let response = await fetch("http://localhost:5000/api/foodData", {
+            const response = await fetch("http://localhost:5000/api/foodData", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
             });
-            let data = await response.json();
-            setFoodCat(data[1]); // Assuming categories are at index 1
-            setFoodItem(data[0]); // Assuming items are at index 0
+            const data = await response.json();
+            setFoodCat(data[1]); // Categories
+            setFoodItem(data[0]); // Items
         } catch (error) {
             console.error("Error fetching food data:", error);
         }
@@ -31,7 +31,6 @@ const Home = () => {
     return (
         <div>
             <Navbar />
-
             <div
                 id="carouselExampleFade"
                 className="carousel slide carousel-fade"
@@ -40,9 +39,9 @@ const Home = () => {
             >
                 <div className="carousel-inner" id="carousel">
                     <div className="carousel-caption" style={{ zIndex: 10 }}>
-                        <div className="d-flex justify-content-center">
+                        <div className={Mystyle.inputSearchContainer}>
                             <input
-                                className="form-control me-2"
+                                className={`${Mystyle.MyInput}  me-2`}
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search"
@@ -51,54 +50,24 @@ const Home = () => {
                             />
                         </div>
                     </div>
-                    <div className="carousel-item active">
-                        <img
-                            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1998&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            className="d-block w-100"
-                            alt="Burger"
-                        />
-                    </div>
-                    <div className="carousel-item">
-                        <img
-                            src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            className="d-block w-100"
-                            alt="Pizza"
-                        />
-                    </div>
-                    <div className="carousel-item">
-                        <img
-                            src="https://images.unsplash.com/photo-1521305916504-4a1121188589?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            className="d-block w-100"
-                            alt="Burger 2"
-                        />
-                    </div>
+                    {/* Carousel items */}
+                    {["https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1998&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      "https://images.unsplash.com/photo-1521305916504-4a1121188589?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"].map((src, index) => (
+                        <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                            <img src={src} className="d-block w-100" alt="Slide" />
+                        </div>
+                    ))}
                 </div>
-                <button
-                    className="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#carouselExampleFade"
-                    data-bs-slide="prev"
-                >
-                    <span
-                        className="carousel-control-prev-icon"
-                        aria-hidden="true"
-                    ></span>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
-                <button
-                    className="carousel-control-next"
-                    type="button"
-                    data-bs-target="#carouselExampleFade"
-                    data-bs-slide="next"
-                >
-                    <span
-                        className="carousel-control-next-icon"
-                        aria-hidden="true"
-                    ></span>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
-
             <div className="container">
                 {foodCat.length > 0 ? (
                     foodCat.map((category) => {
@@ -109,20 +78,12 @@ const Home = () => {
                         );
                         return (
                             <div key={category._id} className="row mb-3">
-                                <div className="fs-3 m-3">
-                                    {category.CategoryName}
-                                </div>
+                                <div className="fs-3 m-3">{category.CategoryName}</div>
                                 <hr />
                                 {filteredItems.length > 0 ? (
                                     filteredItems.map((filteredItem) => (
-                                        <div
-                                            key={filteredItem._id}
-                                            className="col-12 col-md-6 col-lg-3"
-                                        >
-                                            <Card
-                                                foodItem={filteredItem}
-                                                options={filteredItem.options[0]}
-                                            />
+                                        <div key={filteredItem._id} className="col-12 col-md-6 col-lg-3">
+                                            <Card foodItem={filteredItem} options={filteredItem.options[0]} />
                                         </div>
                                     ))
                                 ) : (
@@ -135,7 +96,6 @@ const Home = () => {
                     <div>Loading categories...</div>
                 )}
             </div>
-
             <Footer />
         </div>
     );

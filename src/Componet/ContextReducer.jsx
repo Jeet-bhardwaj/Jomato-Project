@@ -1,27 +1,34 @@
-// Import necessary functions and components from React
+// ContextReducer.js
 import React, { createContext, useReducer, useContext } from "react";
 
-// Create two contexts for managing state and dispatch actions separately
-const CreateStateContext = createContext();    // Context for the state
-const CartDispatchContext = createContext();   // Context for the dispatch function
+const CreateStateContext = createContext();
+const CartDispatchContext = createContext();
 
 const reducer = (state, action) => {
+    
+    switch (action.type) {
+        case "ADD":
+            return [...state, {
+                id: action.id, name: action.name , qty: action.qty,  size : action.size , price: action.price, img: action.img
+            }];
+            
+        
+        default:
+            console
+    }
 };
 
 export const CartProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, []);
 
     return (
-        <>
-            <CartDispatchContext.Provider value={dispatch}>
-                <CreateStateContext.Provider value={state}>
-                    {children}
-                </CreateStateContext.Provider>
-            </CartDispatchContext.Provider>
-        </>
+        <CartDispatchContext.Provider value={dispatch}>
+            <CreateStateContext.Provider value={state}>
+                {children}
+            </CreateStateContext.Provider>
+        </CartDispatchContext.Provider>
     );
 };
 
-// Custom hooks to make it easier for other components to use the contexts
-export const userCart = () => useContext(CreateStateContext);        // Accesses the state
-export const useDispatchCart = () => useContext(CartDispatchContext); // Accesses the dispatch function
+export const useCart = () => useContext(CreateStateContext);
+export const useDispatchCart = () => useContext(CartDispatchContext);
