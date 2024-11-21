@@ -1,4 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
+import Badge from "react-bootstrap/Badge";
+import { FaCartPlus } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
+import { LuLogOut } from "react-icons/lu";
+
+
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -30,6 +36,8 @@ const Navbar = () => {
                     <ul className="navbar-nav me-auto mb-2">
                         <li className="nav-item">
                             <Link className="nav-link active fs-5" to="/">
+                                <IoMdHome />
+                                {" "}
                                 Home
                             </Link>
                         </li>
@@ -58,16 +66,24 @@ const Navbar = () => {
                         <div>
                             <Link
                                 className="btn bg-white text-success mx-1"
-                                to=""
+                                to="/Cart"
                             >
+                                <FaCartPlus />
+                                {"  "}
                                 My cart
+                                {"  "}
+                                <Badge pill bg="danger">
+                                    1
+                                </Badge>
                             </Link>
                             <Link
                                 className="btn bg-white text-danger mx-1"
                                 to=""
                                 onClick={handilOnClick}
                             >
-                                Logout
+                                
+                                {"  "}
+                                <LuLogOut /> 
                             </Link>
                         </div>
                     ) : (
