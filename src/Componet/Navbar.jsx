@@ -40,7 +40,8 @@ const Navbar = () => {
                     <ul className="navbar-nav me-auto mb-2">
                         <li className="nav-item">
                             <Link className={`nav-link active fs-5 text-white ${styles.navLink}`} to="/">
-                                <IoMdHome /> Home
+                                <IoMdHome />
+                                Home
                             </Link>
                         </li>
                         {isAuthenticated && (
@@ -67,6 +68,7 @@ const Navbar = () => {
                             >
                                 <FaCartPlus className="me-2" />
                                 My Cart
+                                {"  "}
                                 <Badge pill bg="danger" className={`${styles.badge}`}>
                                     {cartItems.length}
                                 </Badge>

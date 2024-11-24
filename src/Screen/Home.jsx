@@ -8,6 +8,7 @@ const Home = () => {
     const [search, setSearch] = useState("");
     const [foodCat, setFoodCat] = useState([]);
     const [foodItem, setFoodItem] = useState([]);
+    const [noItemsFound, setNoItemsFound] = useState(false);
 
     const loadData = async () => {
         try {
@@ -26,6 +27,19 @@ const Home = () => {
     useEffect(() => {
         loadData();
     }, []);
+
+    useEffect(() => {
+        // Check if there are any filtered items across all categories after search
+        const hasItems = foodCat.some((category) => {
+            const filteredItems = foodItem.filter(
+                (item) =>
+                    item.CategoryName === category.CategoryName &&
+                    item.name.toLowerCase().includes(search.toLowerCase())
+            );
+            return filteredItems.length > 0;
+        });
+        setNoItemsFound(!hasItems);
+    }, [search, foodItem, foodCat]);
 
     return (
         <div
@@ -97,9 +111,16 @@ const Home = () => {
                                 item.CategoryName === category.CategoryName &&
                                 item.name.toLowerCase().includes(search.toLowerCase())
                         );
+
+                        const showCategoryName = search === "" || filteredItems.length > 0;
+
                         return (
                             <div key={category._id} className="row mb-3">
-                                <div className="fs-3 m-3">{category.CategoryName}</div>
+                                {showCategoryName && (
+                                    <div className="fs-3 m-3 text-dark fw-bold">
+                                        {category.CategoryName}
+                                    </div>
+                                )}
                                 <hr />
                                 {filteredItems.length > 0 ? (
                                     filteredItems.map((filteredItem) => (
@@ -110,14 +131,17 @@ const Home = () => {
                                             <Card foodItem={filteredItem} options={filteredItem.options[0]} />
                                         </div>
                                     ))
-                                ) : (
-                                    <div>No items found for this category</div>
-                                )}
+                                ) : null}
                             </div>
                         );
                     })
                 ) : (
                     <div>Loading categories...</div>
+                )}
+
+                {/* Show "No items found" only once */}
+                {noItemsFound && search !== "" && (
+                    <div className="text-center text-dark fs-4 fw-bold">No items found for your search.</div>
                 )}
             </div>
             <Footer />

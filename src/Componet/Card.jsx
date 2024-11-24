@@ -70,7 +70,7 @@ const Card = (props) => {
                             </option>
                         ))}
                     </select>
-                    <div className="d-inline h-100 fs-5">{finalPrice}/-</div>
+                    <div className="d-inline h-100 fs-5 text-dark fw-bold">{finalPrice}/-</div>
                 </div>
                 <hr />
                 <button
