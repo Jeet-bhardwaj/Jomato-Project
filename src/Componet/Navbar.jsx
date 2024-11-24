@@ -1,23 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../Componet/ContextReducer";
 import Badge from "react-bootstrap/Badge";
 import { FaCartPlus } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { LuLogOut } from "react-icons/lu";
-
-
+import styles from "./Navbar.module.css"; // Import the module CSS
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const handilOnClick = () => {
+    const cartItems = useCart();
+
+    const handleLogout = () => {
         localStorage.removeItem("authToken");
         navigate("/login");
     };
+
     const isAuthenticated = Boolean(localStorage.getItem("authToken"));
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+        <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbar}`}>
             <div className="container-fluid">
-                <Link className="navbar-brand fs-1 fst-italic mx-3 " to="/">
+                <Link className={`navbar-brand fs-2 fst-italic text-white mx-3 ${styles.navbarBrand}`} to="/">
                     Zwigato
                 </Link>
 
@@ -32,72 +35,56 @@ const Navbar = () => {
                 >
                     <span className="navbar-toggler-icon"></span>
                 </button>
+
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2">
                         <li className="nav-item">
-                            <Link className="nav-link active fs-5" to="/">
-                                <IoMdHome />
-                                {" "}
-                                Home
+                            <Link className={`nav-link active fs-5 text-white ${styles.navLink}`} to="/">
+                                <IoMdHome /> Home
                             </Link>
                         </li>
                         {isAuthenticated && (
                             <>
                                 <li className="nav-item">
-                                    <Link
-                                        className="nav-link active fs-5"
-                                        to="/my-order"
-                                    >
+                                    <Link className={`nav-link active fs-5 text-white ${styles.navLink}`} to="/my-order">
                                         My Order
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link
-                                        className="nav-link active fs-5"
-                                        to="/"
-                                    >
+                                    <Link className={`nav-link active fs-5 text-white ${styles.navLink}`} to="/">
                                         Account
                                     </Link>
                                 </li>
                             </>
                         )}
                     </ul>
+
                     {isAuthenticated ? (
-                        <div>
+                        <div className="d-flex">
                             <Link
-                                className="btn bg-white text-success mx-1"
-                                to="/Cart"
+                                className={`btn bg-white text-success mx-2 ${styles.cartBtn}`}
+                                to="/cart"
                             >
-                                <FaCartPlus />
-                                {"  "}
-                                My cart
-                                {"  "}
-                                <Badge pill bg="danger">
-                                    1
+                                <FaCartPlus className="me-2" />
+                                My Cart
+                                <Badge pill bg="danger" className={`${styles.badge}`}>
+                                    {cartItems.length}
                                 </Badge>
                             </Link>
-                            <Link
-                                className="btn bg-white text-danger mx-1"
-                                to=""
-                                onClick={handilOnClick}
+                            <button
+                                className={`btn bg-white text-danger mx-2 ${styles.logoutBtn}`}
+                                onClick={handleLogout}
                             >
-                                
-                                {"  "}
-                                <LuLogOut /> 
-                            </Link>
+                                <LuLogOut className="me-2" />
+                                Logout
+                            </button>
                         </div>
                     ) : (
                         <div className="d-flex">
-                            <Link
-                                className="btn bg-white text-success mx-1"
-                                to="/login"
-                            >
+                            <Link className={`btn bg-white text-success mx-2`} to="/login">
                                 Login
                             </Link>
-                            <Link
-                                className="btn bg-white text-success mx-1"
-                                to="/signup"
-                            >
+                            <Link className={`btn bg-white text-success mx-2`} to="/signup">
                                 SignUp
                             </Link>
                         </div>

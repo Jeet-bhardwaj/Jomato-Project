@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatchCart, useCart } from "./ContextReducer";
+import Mystyle from "./Card.module.css";
 
 const Card = (props) => {
     const priceRef = useRef();
@@ -37,22 +38,14 @@ const Card = (props) => {
     const finalPrice = size && props.options[size] ? qty * parseInt(props.options[size]) : 0;
 
     return (
-        <div
-            className="card"
-            style={{
-                width: "18rem",
-                maxHeight: "auto",
-                margin: "10px",
-            }}
-        >
+        <div className={`${Mystyle.cardContainer}`}>
             <img
                 src={props.foodItem?.img}
-                className="card-img-top"
+                className={`${Mystyle.cardImage}`}
                 alt="Food item"
-                style={{ height: "180px", objectFit: "fill" }}
             />
-            <div className="card-body">
-                <h5 className="card-title">{props.foodItem?.CategoryName}</h5>
+            <div className={`${Mystyle.cardBody}`}>
+                <h5 className="card-title">{props.foodItem?.name}</h5>
                 <p className="card-text">{props.foodItem?.description}</p>
                 <div className="container w-100">
                     <select

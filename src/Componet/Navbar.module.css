@@ -1,0 +1,83 @@
+/* Navbar.module.css */
+
+/* General Styles */
+.navbar {
+     background: linear-gradient(45deg, #28a745, #1c7430);
+     transition: background 0.3s ease;
+   }
+   
+   .navbar-toggler {
+     border: none;
+   }
+   
+   /* Navbar Brand */
+   .navbar-brand {
+     font-size: 2rem;
+     font-weight: 600;
+     color: white;
+     transition: color 0.3s ease;
+   }
+   
+   .navbar-brand:hover {
+     color: #f1c40f;
+   }
+   
+   /* Navbar Links */
+   .navbar-nav .nav-link {
+     font-size: 1.1rem;
+     color: white;
+     transition: color 0.3s ease, transform 0.3s ease;
+   }
+   
+   .navbar-nav .nav-link:hover {
+     color: #f1c40f; /* Highlight on hover */
+     text-decoration: underline;
+     transform: scale(1.1); /* Slight zoom effect */
+   }
+   
+   /* Navbar Button Styling */
+   .btn {
+     transition: background-color 0.3s ease, transform 0.3s ease;
+     border-radius: 5px;
+   }
+   
+   .btn:hover {
+     transform: scale(1.05);
+   }
+   
+   /* Cart & Logout Button */
+   .cart-btn, .logout-btn {
+     display: flex;
+     align-items: center;
+     padding: 0.5rem 1rem;
+     font-size: 1rem;
+     margin-right: 1rem;
+   }
+   
+   .cart-btn:hover, .logout-btn:hover {
+     background-color: #f1f1f1;
+     color: #28a745;
+   }
+   
+   /* Badge Style */
+   .badge {
+     font-size: 1rem;
+     padding: 0.2rem 0.5rem;
+     border-radius: 50%;
+   }
+   
+   .badge-danger {
+     background-color: #dc3545;
+   }
+   
+   /* Mobile Styling */
+   @media (max-width: 768px) {
+     .navbar-nav {
+       text-align: center;
+     }
+   
+     .navbar-nav .nav-item {
+       margin: 0.5rem 0;
+     }
+   }
+   
