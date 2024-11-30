@@ -5,8 +5,12 @@ import { FaCartPlus } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { LuLogOut } from "react-icons/lu";
 import styles from "./Navbar.module.css"; // Import the module CSS
+import { useState } from "react";
+import Cart from "./Cart";
+import Modal from "./Modal";
 
 const Navbar = () => {
+    const [cartView, setCartView] = useState(false); // Proper state handling
     const navigate = useNavigate();
     const cartItems = useCart();
 
@@ -20,7 +24,10 @@ const Navbar = () => {
     return (
         <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbar}`}>
             <div className="container-fluid">
-                <Link className={`navbar-brand fs-2 fst-italic text-white mx-3 ${styles.navbarBrand}`} to="/">
+                <Link
+                    className={`navbar-brand fs-2 fst-italic text-white mx-3 ${styles.navbarBrand}`}
+                    to="/"
+                >
                     Zwigato
                 </Link>
 
@@ -39,7 +46,10 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2">
                         <li className="nav-item">
-                            <Link className={`nav-link active fs-5 text-white ${styles.navLink}`} to="/">
+                            <Link
+                                className={`nav-link active fs-5 text-white ${styles.navLink}`}
+                                to="/"
+                            >
                                 <IoMdHome />
                                 Home
                             </Link>
@@ -47,12 +57,18 @@ const Navbar = () => {
                         {isAuthenticated && (
                             <>
                                 <li className="nav-item">
-                                    <Link className={`nav-link active fs-5 text-white ${styles.navLink}`} to="/my-order">
+                                    <Link
+                                        className={`nav-link active fs-5 text-white ${styles.navLink}`}
+                                        to="/my-order"
+                                    >
                                         My Order
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className={`nav-link active fs-5 text-white ${styles.navLink}`} to="/">
+                                    <Link
+                                        className={`nav-link active fs-5 text-white ${styles.navLink}`}
+                                        to="/"
+                                    >
                                         Account
                                     </Link>
                                 </li>
@@ -62,17 +78,22 @@ const Navbar = () => {
 
                     {isAuthenticated ? (
                         <div className="d-flex">
-                            <Link
+                            <button
                                 className={`btn bg-white text-success mx-2 ${styles.cartBtn}`}
-                                to="/cart"
+                                onClick={() => setCartView(true)} // Correct event handler
                             >
                                 <FaCartPlus className="me-2" />
-                                My Cart
-                                {"  "}
+                                My Cart{"  "}
                                 <Badge pill bg="danger" className={`${styles.badge}`}>
                                     {cartItems.length}
                                 </Badge>
-                            </Link>
+                            </button>
+                            {/* Modal for Cart */}
+                            {cartView && (
+                                <Modal onClose={() => setCartView(false)}>
+                                    <Cart />
+                                </Modal>
+                            )}
                             <button
                                 className={`btn bg-white text-danger mx-2 ${styles.logoutBtn}`}
                                 onClick={handleLogout}

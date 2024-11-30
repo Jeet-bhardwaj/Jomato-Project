@@ -34,8 +34,8 @@ const Cart = () => {
     return (
         <div className="container mt-5">
             <h2 className="text-center">Your Cart</h2>
-            <table className="table table-hover caption-top">
-                <caption>Cart items</caption>
+            <table className="table  caption-top">
+                <caption className="text-dark">Cart items</caption>
                 <thead className="table-success">
                     <tr>
                         <th>#</th>

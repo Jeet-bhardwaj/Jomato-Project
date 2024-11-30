@@ -31,7 +31,10 @@ const Card = (props) => {
             price: finalPrice,
             qty: qty,
             size: size,
+            img: props.foodItem.img,
         });
+        
+        
         console.log(data);
     };
 

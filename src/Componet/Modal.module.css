@@ -1,0 +1,57 @@
+/* Overlay Styles */
+.overlay {
+     position: fixed;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: rgba(0, 0, 0, 0.7);
+     z-index: 1000;
+ }
+ 
+ /* Modal Container */
+ .modal {
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: #fff;
+     padding: 20px;
+     border-radius: 10px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     z-index: 1001;
+     width: 70%; /* Takes up to 70% of the screen */
+     max-width: 800px; /* Maximum width for larger screens */
+     max-height: 70%; /* Ensures the modal doesn't overflow the screen */
+     overflow-y: auto; /* Scrollable for larger content */
+ }
+ 
+ /* Close Button */
+ .closeButton {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     border: none;
+     background: transparent;
+     font-size: 20px;
+     cursor: pointer;
+ }
+ 
+ /* Content Padding */
+ .content {
+     margin: 20px 0;
+ }
+
+
+ /* General Modal Content */
+.modal {
+     color: #000; /* Set text color inside the modal to black */
+ }
+ 
+ /* For table content inside modal */
+ .modal table th,
+ .modal table td {
+     color: #000; /* Force table text to black */
+ }
+ 
+ 
