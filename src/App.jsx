@@ -5,7 +5,7 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import SignUp from "./Screen/SignUp.jsx";
 import Login from "./Screen/Login.jsx";
 import { CartProvider } from "./Componet/ContextReducer.jsx";
-import Cart from "./Componet/Cart.jsx";
+
 
 function App() {
     return (
